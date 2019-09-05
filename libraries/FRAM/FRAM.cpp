@@ -1,13 +1,13 @@
 //
 //    FILE: FRAM.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.1.0
+// VERSION: 0.1.1
 // PURPOSE: Class for FRAM memory
 //     URL:
 //
 // HISTORY:
 // 0.1.0 initial version
-//
+// 0.1.1 added suppport for Fujitsu 64Kbit MB85RC64T (kudos ysoyipek)
 
 #include "FRAM.h"
 
@@ -36,6 +36,7 @@ int FRAM::begin(int address = 0X50)
   if (mid == 0x000A)                  // fujitsu
   {
     // note pid's are from fujitsu       SIZE    TYPE
+    if (pid == 0x0358) _size = 8;     // 8KB     MB85RC64T
     if (pid == 0x0510) _size = 32;    // 32KB    MB85RC256V
     if (pid == 0x0658) _size = 64;    // 64KB    MB85RC512T
     if (pid == 0x0758) _size = 128;   // 128KB   MB85RC1MT
